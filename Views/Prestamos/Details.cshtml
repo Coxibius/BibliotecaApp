@@ -1,0 +1,41 @@
+@model BibliotecaApp.Models.Prestamo
+
+@{
+    ViewData["Title"] = "Detalles del Préstamo";
+}
+
+<div class="container mt-4">
+    <h2>Detalles del Préstamo</h2>
+    <hr />
+    
+    <div class="card shadow-sm col-md-8">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Libro)</dt>
+                <dd class="col-sm-8 fw-bold">@(Model.Libro != null ? Model.Libro.Titulo : "Desconocido")</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Estudiante)</dt>
+                <dd class="col-sm-8">@(Model.Estudiante != null ? Model.Estudiante.Nombre : "Desconocido")</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.FechaPrestamo)</dt>
+                <dd class="col-sm-8">@Model.FechaPrestamo.ToShortDateString()</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.FechaDevolucion)</dt>
+                <dd class="col-sm-8">
+                    @if (Model.FechaDevolucion.HasValue)
+                    {
+                        @Model.FechaDevolucion.Value.ToShortDateString()
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer bg-light">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-2">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+</div>

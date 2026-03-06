@@ -1,0 +1,29 @@
+@model BibliotecaApp.Models.Autor
+
+@{
+    ViewData["Title"] = "Detalles del Autor";
+}
+
+<div class="container mt-4">
+    <h2>Detalles del Autor</h2>
+    <hr />
+    
+    <div class="card shadow-sm col-md-8">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Nombre)</dt>
+                <dd class="col-sm-8 fw-bold">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Nacionalidad)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nacionalidad)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.FechaNacimiento)</dt>
+                <dd class="col-sm-8">@Model.FechaNacimiento.ToShortDateString()</dd>
+            </dl>
+        </div>
+        <div class="card-footer bg-light">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-2">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+</div>

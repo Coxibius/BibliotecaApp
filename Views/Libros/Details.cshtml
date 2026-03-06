@@ -1,0 +1,41 @@
+@model BibliotecaApp.Models.Libro
+
+@{
+    ViewData["Title"] = "Detalles del Libro";
+}
+
+<div class="container mt-4">
+    <h2>Detalles del Libro</h2>
+    <hr />
+    
+    <div class="card shadow-sm col-md-8">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Titulo)</dt>
+                <dd class="col-sm-8 fw-bold">@Html.DisplayFor(model => model.Titulo)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Autor)</dt>
+                <dd class="col-sm-8">@(Model.Autor != null ? Model.Autor.Nombre : "Sin Autor")</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ISBN)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.ISBN)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.AnioPublicacion)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.AnioPublicacion)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Disponible)</dt>
+                <dd class="col-sm-8">
+                    @if(Model.Disponible) {
+                        <span class="badge bg-success">Sí</span>
+                    } else {
+                        <span class="badge bg-danger">No</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer bg-light">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-2">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
+</div>

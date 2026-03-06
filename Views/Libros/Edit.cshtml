@@ -1,0 +1,57 @@
+@model BibliotecaApp.Models.Libro
+
+@{
+    ViewData["Title"] = "Editar Libro";
+}
+
+<div class="container mt-4">
+    <h2>Editar Libro</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+                
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label fw-bold"></label>
+                    <input asp-for="Titulo" class="form-control" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="AutorId" class="form-label fw-bold">Autor</label>
+                    <select asp-for="AutorId" class="form-select" asp-items="ViewBag.AutorId"></select>
+                    <span asp-validation-for="AutorId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ISBN" class="form-label fw-bold"></label>
+                    <input asp-for="ISBN" class="form-control" />
+                    <span asp-validation-for="ISBN" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3">
+                    <label asp-for="AnioPublicacion" class="form-label fw-bold"></label>
+                    <input asp-for="AnioPublicacion" class="form-control" />
+                    <span asp-validation-for="AnioPublicacion" class="text-danger"></span>
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <label class="form-check-label fw-bold">
+                        <input class="form-check-input" asp-for="Disponible" /> @Html.DisplayNameFor(model => model.Disponible)
+                    </label>
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary me-2">Guardar cambios</button>
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,46 @@
+@model BibliotecaApp.Models.Prestamo
+
+@{
+    ViewData["Title"] = "Eliminar Préstamo";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Eliminar Préstamo</h2>
+    <h4>¿Estás seguro de que deseas eliminar este préstamo?</h4>
+    <hr />
+    
+    <div class="card border-danger col-md-8 shadow-sm">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Libro)</dt>
+                <dd class="col-sm-8 fw-bold">@(Model.Libro != null ? Model.Libro.Titulo : "Desconocido")</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Estudiante)</dt>
+                <dd class="col-sm-8">@(Model.Estudiante != null ? Model.Estudiante.Nombre : "Desconocido")</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.FechaPrestamo)</dt>
+                <dd class="col-sm-8">@Model.FechaPrestamo.ToShortDateString()</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.FechaDevolucion)</dt>
+                <dd class="col-sm-8">
+                    @if (Model.FechaDevolucion.HasValue)
+                    {
+                        @Model.FechaDevolucion.Value.ToShortDateString()
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+        
+        <div class="card-footer bg-light">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

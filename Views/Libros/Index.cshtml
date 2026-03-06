@@ -1,0 +1,53 @@
+@model IEnumerable<BibliotecaApp.Models.Libro>
+
+@{
+    ViewData["Title"] = "Libros";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Libros</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nuevo Libro
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mt-3 align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Titulo)</th>
+                    <th>@Html.DisplayNameFor(model => model.Autor)</th>
+                    <th>@Html.DisplayNameFor(model => model.ISBN)</th>
+                    <th>@Html.DisplayNameFor(model => model.AnioPublicacion)</th>
+                    <th>@Html.DisplayNameFor(model => model.Disponible)</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Titulo)</td>
+                    <td>@(item.Autor != null ? item.Autor.Nombre : "Sin Autor")</td>
+                    <td>@Html.DisplayFor(modelItem => item.ISBN)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AnioPublicacion)</td>
+                    <td>
+                        @if(item.Disponible) {
+                            <span class="badge bg-success">Sí</span>
+                        } else {
+                            <span class="badge bg-danger">No</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Detalles</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+@model BibliotecaApp.Models.Prestamo
+
+@{
+    ViewData["Title"] = "Nuevo Préstamo";
+}
+
+<div class="container mt-4">
+    <h2>Nuevo Préstamo</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                
+                <div class="mb-3">
+                    <label asp-for="EstudianteId" class="form-label fw-bold">Estudiante</label>
+                    <select asp-for="EstudianteId" class="form-select" asp-items="ViewBag.EstudianteId">
+                        <option value="">-- Seleccione un Estudiante --</option>
+                    </select>
+                    <span asp-validation-for="EstudianteId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LibroId" class="form-label fw-bold">Libro Disponible</label>
+                    <select asp-for="LibroId" class="form-select" asp-items="ViewBag.LibroId">
+                        <option value="">-- Seleccione un Libro --</option>
+                    </select>
+                    <span asp-validation-for="LibroId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FechaPrestamo" class="form-label fw-bold"></label>
+                    <input asp-for="FechaPrestamo" class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    <span asp-validation-for="FechaPrestamo" class="text-danger"></span>
+                </div>
+
+                <!-- Ocultamos FechaDevolucion en Create porque al crear siempre es null por defecto -->
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success me-2">Guardar Préstamo</button>
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

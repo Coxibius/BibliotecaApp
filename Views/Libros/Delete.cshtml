@@ -1,0 +1,46 @@
+@model BibliotecaApp.Models.Libro
+
+@{
+    ViewData["Title"] = "Eliminar Libro";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Eliminar Libro</h2>
+    <h4>¿Estás seguro de que deseas eliminar este libro?</h4>
+    <hr />
+    
+    <div class="card border-danger col-md-8 shadow-sm">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Titulo)</dt>
+                <dd class="col-sm-8 fw-bold">@Html.DisplayFor(model => model.Titulo)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Autor)</dt>
+                <dd class="col-sm-8">@(Model.Autor != null ? Model.Autor.Nombre : "Sin Autor")</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ISBN)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.ISBN)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.AnioPublicacion)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.AnioPublicacion)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Disponible)</dt>
+                <dd class="col-sm-8">
+                    @if(Model.Disponible) {
+                        <span class="badge bg-success">Sí</span>
+                    } else {
+                        <span class="badge bg-danger">No</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+        
+        <div class="card-footer bg-light">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

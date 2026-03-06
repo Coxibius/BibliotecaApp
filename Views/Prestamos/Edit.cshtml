@@ -1,0 +1,52 @@
+@model BibliotecaApp.Models.Prestamo
+
+@{
+    ViewData["Title"] = "Editar Préstamo";
+}
+
+<div class="container mt-4">
+    <h2>Editar Préstamo</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="Id" />
+                
+                <div class="mb-3">
+                    <label asp-for="EstudianteId" class="form-label fw-bold">Estudiante</label>
+                    <select asp-for="EstudianteId" class="form-select" asp-items="ViewBag.EstudianteId"></select>
+                    <span asp-validation-for="EstudianteId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LibroId" class="form-label fw-bold">Libro</label>
+                    <select asp-for="LibroId" class="form-select" asp-items="ViewBag.LibroId"></select>
+                    <span asp-validation-for="LibroId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FechaPrestamo" class="form-label fw-bold"></label>
+                    <input asp-for="FechaPrestamo" class="form-control" type="date" />
+                    <span asp-validation-for="FechaPrestamo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FechaDevolucion" class="form-label fw-bold"></label>
+                    <input asp-for="FechaDevolucion" class="form-control" type="date" />
+                    <span class="text-muted small">Dejar vacío si no se ha devuelto.</span>
+                    <span asp-validation-for="FechaDevolucion" class="text-danger"></span>
+                </div>
+                
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary me-2">Guardar cambios</button>
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

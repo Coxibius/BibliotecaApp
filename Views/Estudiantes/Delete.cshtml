@@ -1,0 +1,31 @@
+@model BibliotecaApp.Models.Estudiante
+
+@{
+    ViewData["Title"] = "Eliminar Estudiante";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Eliminar Estudiante</h2>
+    <h4>¿Estás seguro de que deseas eliminar este estudiante?</h4>
+    <hr />
+    
+    <div class="card border-danger col-md-8 shadow-sm">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Nombre)</dt>
+                <dd class="col-sm-8 fw-bold">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Matricula)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Matricula)</dd>
+            </dl>
+        </div>
+        
+        <div class="card-footer bg-light">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger me-2">Eliminar</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

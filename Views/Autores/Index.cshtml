@@ -1,0 +1,43 @@
+@model IEnumerable<BibliotecaApp.Models.Autor>
+
+@{
+    ViewData["Title"] = "Autores";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Autores</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nuevo Autor
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover mt-3 align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.Nacionalidad)</th>
+                    <th>@Html.DisplayNameFor(model => model.FechaNacimiento)</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nacionalidad)</td>
+                    <td>@item.FechaNacimiento.ToShortDateString()</td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Detalles</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>
