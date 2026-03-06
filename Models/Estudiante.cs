@@ -6,8 +6,8 @@ namespace BibliotecaApp.Models
     public class Estudiante
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Matricula { get; set; }
-        public List<Prestamo> Prestamos { get; set; }
+        public string? Nombre { get; set; }
+        public string? Matricula { get; set; }
+        public List<Prestamo>? Prestamos { get; set; }
     }
 }

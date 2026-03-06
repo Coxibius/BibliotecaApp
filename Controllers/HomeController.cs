@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using BibliotecaApp.Data;
 using BibliotecaApp.Models;
 
 namespace BibliotecaApp.Controllers;
@@ -7,15 +9,22 @@ namespace BibliotecaApp.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly BibliotecaContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, BibliotecaContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var librosDisponibles = await _context.Libros
+            .Include(l => l.Autor)
+            .Where(l => l.Disponible)
+            .ToListAsync();
+
+        return View(librosDisponibles);
     }
 
     public IActionResult Privacy()

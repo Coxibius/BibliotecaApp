@@ -9,9 +9,9 @@ namespace BibliotecaApp.Models
         public DateTime? FechaDevolucion { get; set; }
         
         public int LibroId { get; set; }
-        public Libro Libro { get; set; }
+        public Libro? Libro { get; set; }
 
         public int EstudianteId { get; set; }
-        public Estudiante Estudiante { get; set; }
+        public Estudiante? Estudiante { get; set; }
     }
 }
