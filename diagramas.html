@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +8,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <style>
-    body { background: #f4f6fb; font-family: 'Segoe UI', sans-serif; }
+    body {
+      background: #f4f6fb;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
     .hero {
       background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%);
       color: #fff;
@@ -15,32 +20,94 @@
       border-radius: 0 0 1.5rem 1.5rem;
       margin-bottom: 2rem;
     }
-    .hero h1 { font-size: 1.9rem; font-weight: 700; }
-    .hero p  { opacity: .85; margin: 0; }
-    .nav-tabs .nav-link { color: #2d6a9f; font-weight: 500; border-radius: .5rem .5rem 0 0; }
-    .nav-tabs .nav-link.active { color: #1e3a5f; border-bottom-color: #fff; font-weight: 700; }
+
+    .hero h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      opacity: .85;
+      margin: 0;
+    }
+
+    .nav-tabs .nav-link {
+      color: #2d6a9f;
+      font-weight: 500;
+      border-radius: .5rem .5rem 0 0;
+    }
+
+    .nav-tabs .nav-link.active {
+      color: #1e3a5f;
+      border-bottom-color: #fff;
+      font-weight: 700;
+    }
+
     .diagram-card {
       background: #fff;
       border: 1px solid #dee2e6;
       border-radius: 0 .75rem .75rem .75rem;
-      padding: 1.5rem;
-      min-height: 420px;
+      padding: 1.75rem;
     }
-    .diagram-card h5 { color: #1e3a5f; font-weight: 700; margin-bottom: .25rem; }
-    .diagram-card p.desc { font-size: .88rem; color: #6c757d; margin-bottom: 1.25rem; }
+
+    .diagram-card h5 {
+      color: #1e3a5f;
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    /* Sección de explicación */
+    .explanation-box {
+      background: #eef4fb;
+      border-left: 4px solid #2d6a9f;
+      border-radius: .5rem;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .explanation-box h6 {
+      font-weight: 700;
+      color: #1e3a5f;
+      margin-bottom: .5rem;
+    }
+
+    .explanation-box p,
+    .explanation-box ul {
+      font-size: .9rem;
+      color: #3a3a5c;
+      margin-bottom: 0;
+    }
+
+    .explanation-box ul {
+      padding-left: 1.2rem;
+    }
+
+    .legend-table {
+      font-size: .85rem;
+    }
+
+    .legend-table th {
+      background: #dce8f5;
+      color: #1e3a5f;
+    }
+
     .diagram-frame {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      min-height: 350px;
+      min-height: 320px;
       background: #f9fafb;
       border: 1px dashed #ced4da;
       border-radius: .5rem;
       padding: 1rem;
+      margin-top: 1rem;
     }
-    .diagram-frame img { max-width: 100%; height: auto; }
-    .spinner-text { color: #adb5bd; font-size: .9rem; margin-top: .5rem; }
-    .code-toggle { font-size: .8rem; }
+
+    .diagram-frame img {
+      max-width: 100%;
+      height: auto;
+    }
+
     pre.plantuml-src {
       background: #1e1e2e;
       color: #cdd6f4;
@@ -50,14 +117,19 @@
       overflow-x: auto;
       margin-top: 1rem;
     }
+
+    .badge-concept {
+      font-size: .78rem;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="hero">
     <div class="container">
       <h1><i class="bi bi-diagram-3-fill me-2"></i>BibliotecaApp — Documentación UML</h1>
-      <p>Arquitectura del sistema representada mediante 5 diagramas PlantUML</p>
+      <p>Arquitectura del sistema documentada con 5 diagramas UML. Cada diagrama incluye su explicación y leyenda.</p>
     </div>
   </div>
 
@@ -65,57 +137,355 @@
 
     <!-- Tabs -->
     <ul class="nav nav-tabs" id="diagramTabs" role="tablist">
-      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-uc"  type="button"><i class="bi bi-people me-1"></i>Casos de Uso</button></li>
-      <li class="nav-item"><button class="nav-link"        data-bs-toggle="tab" data-bs-target="#tab-cls" type="button"><i class="bi bi-boxes me-1"></i>Clases</button></li>
-      <li class="nav-item"><button class="nav-link"        data-bs-toggle="tab" data-bs-target="#tab-seq" type="button"><i class="bi bi-arrow-left-right me-1"></i>Secuencia</button></li>
-      <li class="nav-item"><button class="nav-link"        data-bs-toggle="tab" data-bs-target="#tab-st"  type="button"><i class="bi bi-toggles me-1"></i>Estados</button></li>
-      <li class="nav-item"><button class="nav-link"        data-bs-toggle="tab" data-bs-target="#tab-act" type="button"><i class="bi bi-signpost-split me-1"></i>Actividades</button></li>
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-uc"
+          type="button"><i class="bi bi-people me-1"></i>Casos de Uso</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-cls" type="button"><i
+            class="bi bi-boxes me-1"></i>Clases</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-seq" type="button"><i
+            class="bi bi-arrow-left-right me-1"></i>Secuencia</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-st" type="button"><i
+            class="bi bi-toggles me-1"></i>Estados</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-act" type="button"><i
+            class="bi bi-signpost-split me-1"></i>Actividades</button></li>
     </ul>
 
     <div class="tab-content" id="diagramTabContent">
 
-      <!-- ─── 1. CASOS DE USO ─── -->
+      <!-- ══════════════════════════════════════════════════════
+           1. CASOS DE USO
+           ══════════════════════════════════════════════════════ -->
       <div class="tab-pane fade show active diagram-card" id="tab-uc">
         <h5><i class="bi bi-people-fill me-2 text-primary"></i>Diagrama de Casos de Uso</h5>
-        <p class="desc">Actores Bibliotecario y Estudiante interactuando con las funciones del sistema.</p>
+
+        <div class="explanation-box mt-3">
+          <h6><i class="bi bi-info-circle me-1"></i> ¿Qué es?</h6>
+          <p>Un <strong>diagrama de casos de uso</strong> muestra <em>qué puede hacer el sistema</em> y <em>quién lo
+              usa</em>. No describe <em>cómo</em> lo hace, solo las funciones disponibles y los actores involucrados.
+          </p>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-people me-1"></i> Actores del sistema</h6>
+          <ul>
+            <li><strong>Bibliotecario</strong> — Administrador del sistema. Gestiona autores, libros, estudiantes y
+              todos los préstamos.</li>
+            <li><strong>Estudiante</strong> — Usuario final. Puede ver el catálogo de libros disponibles y solicitar un
+              préstamo.</li>
+          </ul>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-list-check me-1"></i> Casos de uso y su significado</h6>
+          <table class="table table-sm legend-table">
+            <thead>
+              <tr>
+                <th>Caso de Uso</th>
+                <th>¿Quién?</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gestionar Autores</td>
+                <td>Bibliotecario</td>
+                <td>CRUD completo de autores (crear, editar, eliminar, ver).</td>
+              </tr>
+              <tr>
+                <td>Gestionar Libros</td>
+                <td>Bibliotecario</td>
+                <td>CRUD completo de libros, asignando un autor a cada uno.</td>
+              </tr>
+              <tr>
+                <td>Gestionar Estudiantes</td>
+                <td>Bibliotecario</td>
+                <td>CRUD completo de estudiantes registrados.</td>
+              </tr>
+              <tr>
+                <td>Registrar Préstamo</td>
+                <td>Ambos</td>
+                <td>Asocia un libro disponible a un estudiante. El libro pasa a no disponible.</td>
+              </tr>
+              <tr>
+                <td>Registrar Devolución</td>
+                <td>Bibliotecario</td>
+                <td>Marca el préstamo como devuelto y libera el libro.</td>
+              </tr>
+              <tr>
+                <td>Eliminar Préstamo</td>
+                <td>Bibliotecario</td>
+                <td>Elimina el registro y restaura la disponibilidad del libro si no fue devuelto.</td>
+              </tr>
+              <tr>
+                <td>Ver Catálogo</td>
+                <td>Estudiante</td>
+                <td>Página de inicio pública que muestra todos los libros disponibles.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="diagram-frame"><img id="img-uc" alt="Casos de Uso" /></div>
-        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-uc')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <button class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleCode('src-uc')"><i
+            class="bi bi-code-slash"></i> Ver código PlantUML</button>
         <pre id="src-uc" class="plantuml-src" style="display:none"></pre>
       </div>
 
-      <!-- ─── 2. CLASES ─── -->
+      <!-- ══════════════════════════════════════════════════════
+           2. CLASES
+           ══════════════════════════════════════════════════════ -->
       <div class="tab-pane fade diagram-card" id="tab-cls">
         <h5><i class="bi bi-boxes me-2 text-primary"></i>Diagrama de Clases</h5>
-        <p class="desc">Basado exactamente en los modelos C# (Autor, Libro, Estudiante, Prestamo) con tipos y multiplicidad.</p>
+
+        <div class="explanation-box mt-3">
+          <h6><i class="bi bi-info-circle me-1"></i> ¿Qué es?</h6>
+          <p>Un <strong>diagrama de clases</strong> representa la <em>estructura estática</em> del sistema: las
+            entidades (clases/modelos), sus atributos con tipos de datos, y las relaciones entre ellas. Es la base del
+            modelo de base de datos.</p>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-link-45deg me-1"></i> Relaciones y multiplicidad</h6>
+          <ul>
+            <li><strong>Autor → Libro (1 a muchos):</strong> Un autor puede haber escrito varios libros, pero cada libro
+              tiene un único autor (<code>AutorId</code>).</li>
+            <li><strong>Libro → Prestamo (1 a muchos):</strong> Un libro puede estar en varios préstamos a lo largo del
+              tiempo, pero solo uno activo (Disponible = false).</li>
+            <li><strong>Estudiante → Prestamo (1 a muchos):</strong> Un estudiante puede tener varios préstamos
+              registrados.</li>
+          </ul>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-table me-1"></i> Atributos destacados</h6>
+          <table class="table table-sm legend-table">
+            <thead>
+              <tr>
+                <th>Clase</th>
+                <th>Atributo clave</th>
+                <th>Notas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Libro</td>
+                <td><code>Disponible: bool</code></td>
+                <td>Controla si el libro puede prestarse. Por defecto <code>true</code>.</td>
+              </tr>
+              <tr>
+                <td>Prestamo</td>
+                <td><code>FechaDevolucion: DateTime?</code></td>
+                <td>Es nullable (<code>?</code>): si es <code>null</code>, el préstamo sigue activo.</td>
+              </tr>
+              <tr>
+                <td>Libro / Autor</td>
+                <td><code>string?</code></td>
+                <td>Nullable para evitar errores de validación en MVC con Nullable enable.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="diagram-frame"><img id="img-cls" alt="Clases" /></div>
-        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-cls')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <button class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleCode('src-cls')"><i
+            class="bi bi-code-slash"></i> Ver código PlantUML</button>
         <pre id="src-cls" class="plantuml-src" style="display:none"></pre>
       </div>
 
-      <!-- ─── 3. SECUENCIA ─── -->
+      <!-- ══════════════════════════════════════════════════════
+           3. SECUENCIA
+           ══════════════════════════════════════════════════════ -->
       <div class="tab-pane fade diagram-card" id="tab-seq">
         <h5><i class="bi bi-arrow-left-right me-2 text-primary"></i>Diagrama de Secuencia</h5>
-        <p class="desc">Flujo completo del registro de un Préstamo desde la Vista hasta que el Controlador guarda en la BD.</p>
+
+        <div class="explanation-box mt-3">
+          <h6><i class="bi bi-info-circle me-1"></i> ¿Qué es?</h6>
+          <p>Un <strong>diagrama de secuencia</strong> muestra la <em>interacción entre componentes a lo largo del
+              tiempo</em>, de arriba hacia abajo. Las flechas representan mensajes o llamadas entre participantes.</p>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-diagram-2 me-1"></i> Flujo representado: Crear un Préstamo</h6>
+          <p>Este diagrama traza el camino completo de registrar un préstamo exitoso:</p>
+          <ol style="font-size:.9rem; color:#3a3a5c;">
+            <li>El <strong>Usuario</strong> llena el formulario en la <strong>Vista Create</strong> y presiona Guardar.
+            </li>
+            <li>La Vista envía un <strong>POST HTTP</strong> al <code>PrestamosController</code>.</li>
+            <li>El controlador valida el modelo (<code>ModelState.IsValid</code>).</li>
+            <li>Busca el libro seleccionado en la BD para cambiar <code>Disponible = false</code>.</li>
+            <li>Guarda el nuevo préstamo con <code>SaveChangesAsync()</code>.</li>
+            <li>Redirige al índice de préstamos con la lista actualizada.</li>
+          </ol>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-people me-1"></i> Participantes</h6>
+          <table class="table table-sm legend-table">
+            <thead>
+              <tr>
+                <th>Participante</th>
+                <th>Rol</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Usuario</td>
+                <td>Persona usando el navegador.</td>
+              </tr>
+              <tr>
+                <td>Vista Create</td>
+                <td>Formulario Razor (<code>.cshtml</code>) que envía los datos.</td>
+              </tr>
+              <tr>
+                <td>PrestamosController</td>
+                <td>Lógica de negocio en el servidor.</td>
+              </tr>
+              <tr>
+                <td>BibliotecaContext</td>
+                <td>ORM (Entity Framework Core) que traduce a SQL.</td>
+              </tr>
+              <tr>
+                <td>SQL Server</td>
+                <td>Base de datos que persiste los datos.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="diagram-frame"><img id="img-seq" alt="Secuencia" /></div>
-        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-seq')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <button class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleCode('src-seq')"><i
+            class="bi bi-code-slash"></i> Ver código PlantUML</button>
         <pre id="src-seq" class="plantuml-src" style="display:none"></pre>
       </div>
 
-      <!-- ─── 4. ESTADOS ─── -->
+      <!-- ══════════════════════════════════════════════════════
+           4. ESTADOS
+           ══════════════════════════════════════════════════════ -->
       <div class="tab-pane fade diagram-card" id="tab-st">
         <h5><i class="bi bi-toggles me-2 text-primary"></i>Diagrama de Estados</h5>
-        <p class="desc">Ciclo de vida de la propiedad <code>Disponible</code> de un Libro (Disponible → Prestado → Disponible).</p>
+
+        <div class="explanation-box mt-3">
+          <h6><i class="bi bi-info-circle me-1"></i> ¿Qué es?</h6>
+          <p>Un <strong>diagrama de estados</strong> (o de máquina de estados) muestra todos los <em>estados
+              posibles</em> de un objeto y los <em>eventos o acciones</em> que lo hacen cambiar de un estado a otro.</p>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-book me-1"></i> Objeto representado: la propiedad <code>Disponible</code> de un Libro</h6>
+          <p>El campo <code>Disponible (bool)</code> en la clase <code>Libro</code> define en cuál de estos estados se
+            encuentra:</p>
+          <table class="table table-sm legend-table">
+            <thead>
+              <tr>
+                <th>Estado</th>
+                <th>Valor</th>
+                <th>Significado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge bg-success badge-concept">Disponible</span></td>
+                <td><code>true</code></td>
+                <td>El libro puede ser prestado. Aparece en el catálogo.</td>
+              </tr>
+              <tr>
+                <td><span class="badge bg-danger badge-concept">Prestado</span></td>
+                <td><code>false</code></td>
+                <td>El libro está en manos de un estudiante. No aparece en el catálogo.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-arrow-right-circle me-1"></i> Transiciones</h6>
+          <ul>
+            <li><strong>Libro creado →</strong> nace como <em>Disponible</em>.</li>
+            <li><strong>Disponible → Prestado:</strong> cuando el bibliotecario registra un nuevo préstamo
+              (<code>Disponible = false</code>).</li>
+            <li><strong>Prestado → Disponible:</strong> cuando se registra la devolución
+              (<code>Disponible = true</code>) o se elimina el préstamo activo.</li>
+            <li><strong>Disponible → Fin:</strong> cuando el libro se elimina del sistema.</li>
+          </ul>
+        </div>
+
         <div class="diagram-frame"><img id="img-st" alt="Estados" /></div>
-        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-st')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <button class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleCode('src-st')"><i
+            class="bi bi-code-slash"></i> Ver código PlantUML</button>
         <pre id="src-st" class="plantuml-src" style="display:none"></pre>
       </div>
 
-      <!-- ─── 5. ACTIVIDADES ─── -->
+      <!-- ══════════════════════════════════════════════════════
+           5. ACTIVIDADES
+           ══════════════════════════════════════════════════════ -->
       <div class="tab-pane fade diagram-card" id="tab-act">
         <h5><i class="bi bi-signpost-split me-2 text-primary"></i>Diagrama de Actividades</h5>
-        <p class="desc">Flujo lógico completo del método <code>Devolver(int id)</code> del PrestamosController.</p>
+
+        <div class="explanation-box mt-3">
+          <h6><i class="bi bi-info-circle me-1"></i> ¿Qué es?</h6>
+          <p>Un <strong>diagrama de actividades</strong> es similar a un diagrama de flujo. Representa el <em>algoritmo
+              o lógica interna</em> de un proceso, mostrando decisiones (<code>if/else</code>), acciones secuenciales y
+            puntos de inicio/fin.</p>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-code-square me-1"></i> Proceso representado: método <code>Devolver(int id)</code></h6>
+          <p>Este diagrama mapea exactamente el código del método <code>Devolver</code> en
+            <code>PrestamosController.cs</code>:</p>
+          <ol style="font-size:.9rem; color:#3a3a5c;">
+            <li>Recibe el <code>id</code> del préstamo a devolver.</li>
+            <li>Busca el préstamo en la BD con <code>Include(Libro)</code> para cargar el libro relacionado.</li>
+            <li><strong>Decisión 1:</strong> Si el préstamo no existe → retorna <code>404 Not Found</code>.</li>
+            <li><strong>Decisión 2:</strong> Si <code>FechaDevolucion</code> ya tiene valor → el préstamo ya fue
+              devuelto, no hace nada.</li>
+            <li>Si sigue activo: asigna <code>FechaDevolucion = DateTime.Now</code>.</li>
+            <li><strong>Decisión 3:</strong> Si el libro relacionado existe → cambia <code>Disponible = true</code> y lo
+              actualiza.</li>
+            <li>Actualiza el préstamo y guarda con <code>SaveChangesAsync()</code>.</li>
+            <li>Redirige al índice de préstamos.</li>
+          </ol>
+        </div>
+
+        <div class="explanation-box">
+          <h6><i class="bi bi-lightbulb me-1"></i> Leyenda de símbolos</h6>
+          <table class="table table-sm legend-table">
+            <thead>
+              <tr>
+                <th>Símbolo</th>
+                <th>Significado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>⬤ negro (inicio)</td>
+                <td>Punto de entrada del flujo.</td>
+              </tr>
+              <tr>
+                <td>Rectángulo</td>
+                <td>Acción o instrucción a ejecutar.</td>
+              </tr>
+              <tr>
+                <td>Rombo / bifurcación</td>
+                <td>Decisión (<code>if / else</code>).</td>
+              </tr>
+              <tr>
+                <td>Rectángulo rosa</td>
+                <td>Fin de error / caso negativo.</td>
+              </tr>
+              <tr>
+                <td>⬤ con círculo (fin)</td>
+                <td>Punto de salida del flujo.</td>
+              </tr>
+              <tr>
+                <td>Nota lateral</td>
+                <td>Comentario explicativo.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="diagram-frame"><img id="img-act" alt="Actividades" /></div>
-        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-act')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <button class="btn btn-sm btn-outline-secondary mt-2" onclick="toggleCode('src-act')"><i
+            class="bi bi-code-slash"></i> Ver código PlantUML</button>
         <pre id="src-act" class="plantuml-src" style="display:none"></pre>
       </div>
 
@@ -130,7 +500,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // ── Convierte texto PlantUML a URL del servidor via hex encoding ──
     function toHex(str) {
       let hex = '';
       for (let i = 0; i < str.length; i++) {
@@ -150,9 +519,7 @@
       el.style.display = el.style.display === 'none' ? 'block' : 'none';
     }
 
-    // ════════════════════════════════════════════════
     // 1. CASOS DE USO
-    // ════════════════════════════════════════════════
     const ucUml = `
 @startuml
 skinparam monochrome true
@@ -183,9 +550,7 @@ Est --> UC7
 Est --> UC4
 @enduml`;
 
-    // ════════════════════════════════════════════════
     // 2. CLASES
-    // ════════════════════════════════════════════════
     const clsUml = `
 @startuml
 skinparam monochrome true
@@ -226,9 +591,7 @@ Libro    "1" --> "0..*" Prestamo : incluye >
 Estudiante "1" --> "0..*" Prestamo : realiza >
 @enduml`;
 
-    // ════════════════════════════════════════════════
     // 3. SECUENCIA
-    // ════════════════════════════════════════════════
     const seqUml = `
 @startuml
 skinparam monochrome true
@@ -260,9 +623,7 @@ C  --> V  : RedirectToAction(Index)
 V  --> U  : Lista de Préstamos actualizada
 @enduml`;
 
-    // ════════════════════════════════════════════════
     // 4. ESTADOS
-    // ════════════════════════════════════════════════
     const stUml = `
 @startuml
 skinparam monochrome true
@@ -283,9 +644,7 @@ Prestado   --> Disponible  : Eliminar Préstamo\\n[Disponible = true]
 Disponible --> [*]         : Eliminar Libro
 @enduml`;
 
-    // ════════════════════════════════════════════════
-    // 5. ACTIVIDADES — Devolver()
-    // ════════════════════════════════════════════════
+    // 5. ACTIVIDADES
     const actUml = `
 @startuml
 skinparam monochrome true
@@ -328,13 +687,12 @@ endif
 stop
 @enduml`;
 
-    // ── Renderizar todos al cargar ──
-    render('img-uc',  'src-uc',  ucUml);
+    render('img-uc', 'src-uc', ucUml);
     render('img-cls', 'src-cls', clsUml);
     render('img-seq', 'src-seq', seqUml);
-    render('img-st',  'src-st',  stUml);
+    render('img-st', 'src-st', stUml);
     render('img-act', 'src-act', actUml);
   </script>
 </body>
+
 </html>
-`
