@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BibliotecaApp — Diagramas UML</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <style>
+    body { background: #f4f6fb; font-family: 'Segoe UI', sans-serif; }
+    .hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+      border-radius: 0 0 1.5rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .hero h1 { font-size: 1.9rem; font-weight: 700; }
+    .hero p  { opacity: .85; margin: 0; }
+    .nav-tabs .nav-link { color: #2d6a9f; font-weight: 500; border-radius: .5rem .5rem 0 0; }
+    .nav-tabs .nav-link.active { color: #1e3a5f; border-bottom-color: #fff; font-weight: 700; }
+    .diagram-card {
+      background: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 0 .75rem .75rem .75rem;
+      padding: 1.5rem;
+      min-height: 420px;
+    }
+    .diagram-card h5 { color: #1e3a5f; font-weight: 700; margin-bottom: .25rem; }
+    .diagram-card p.desc { font-size: .88rem; color: #6c757d; margin-bottom: 1.25rem; }
+    .diagram-frame {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 350px;
+      background: #f9fafb;
+      border: 1px dashed #ced4da;
+      border-radius: .5rem;
+      padding: 1rem;
+    }
+    .diagram-frame img { max-width: 100%; height: auto; }
+    .spinner-text { color: #adb5bd; font-size: .9rem; margin-top: .5rem; }
+    .code-toggle { font-size: .8rem; }
+    pre.plantuml-src {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: .5rem;
+      padding: 1rem;
+      font-size: .78rem;
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="container">
+      <h1><i class="bi bi-diagram-3-fill me-2"></i>BibliotecaApp — Documentación UML</h1>
+      <p>Arquitectura del sistema representada mediante 5 diagramas PlantUML</p>
+    </div>
+  </div>
+
+  <div class="container pb-5">
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="diagramTabs" role="tablist">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-uc"  type="button"><i class="bi bi-people me-1"></i>Casos de Uso</button></li>
+      <li class="nav-item"><button class="nav-link"        data-bs-toggle="tab" data-bs-target="#tab-cls" type="button"><i class="bi bi-boxes me-1"></i>Clases</button></li>
+      <li class="nav-item"><button class="nav-link"        data-bs-toggle="tab" data-bs-target="#tab-seq" type="button"><i class="bi bi-arrow-left-right me-1"></i>Secuencia</button></li>
+      <li class="nav-item"><button class="nav-link"        data-bs-toggle="tab" data-bs-target="#tab-st"  type="button"><i class="bi bi-toggles me-1"></i>Estados</button></li>
+      <li class="nav-item"><button class="nav-link"        data-bs-toggle="tab" data-bs-target="#tab-act" type="button"><i class="bi bi-signpost-split me-1"></i>Actividades</button></li>
+    </ul>
+
+    <div class="tab-content" id="diagramTabContent">
+
+      <!-- ─── 1. CASOS DE USO ─── -->
+      <div class="tab-pane fade show active diagram-card" id="tab-uc">
+        <h5><i class="bi bi-people-fill me-2 text-primary"></i>Diagrama de Casos de Uso</h5>
+        <p class="desc">Actores Bibliotecario y Estudiante interactuando con las funciones del sistema.</p>
+        <div class="diagram-frame"><img id="img-uc" alt="Casos de Uso" /></div>
+        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-uc')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <pre id="src-uc" class="plantuml-src" style="display:none"></pre>
+      </div>
+
+      <!-- ─── 2. CLASES ─── -->
+      <div class="tab-pane fade diagram-card" id="tab-cls">
+        <h5><i class="bi bi-boxes me-2 text-primary"></i>Diagrama de Clases</h5>
+        <p class="desc">Basado exactamente en los modelos C# (Autor, Libro, Estudiante, Prestamo) con tipos y multiplicidad.</p>
+        <div class="diagram-frame"><img id="img-cls" alt="Clases" /></div>
+        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-cls')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <pre id="src-cls" class="plantuml-src" style="display:none"></pre>
+      </div>
+
+      <!-- ─── 3. SECUENCIA ─── -->
+      <div class="tab-pane fade diagram-card" id="tab-seq">
+        <h5><i class="bi bi-arrow-left-right me-2 text-primary"></i>Diagrama de Secuencia</h5>
+        <p class="desc">Flujo completo del registro de un Préstamo desde la Vista hasta que el Controlador guarda en la BD.</p>
+        <div class="diagram-frame"><img id="img-seq" alt="Secuencia" /></div>
+        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-seq')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <pre id="src-seq" class="plantuml-src" style="display:none"></pre>
+      </div>
+
+      <!-- ─── 4. ESTADOS ─── -->
+      <div class="tab-pane fade diagram-card" id="tab-st">
+        <h5><i class="bi bi-toggles me-2 text-primary"></i>Diagrama de Estados</h5>
+        <p class="desc">Ciclo de vida de la propiedad <code>Disponible</code> de un Libro (Disponible → Prestado → Disponible).</p>
+        <div class="diagram-frame"><img id="img-st" alt="Estados" /></div>
+        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-st')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <pre id="src-st" class="plantuml-src" style="display:none"></pre>
+      </div>
+
+      <!-- ─── 5. ACTIVIDADES ─── -->
+      <div class="tab-pane fade diagram-card" id="tab-act">
+        <h5><i class="bi bi-signpost-split me-2 text-primary"></i>Diagrama de Actividades</h5>
+        <p class="desc">Flujo lógico completo del método <code>Devolver(int id)</code> del PrestamosController.</p>
+        <div class="diagram-frame"><img id="img-act" alt="Actividades" /></div>
+        <button class="btn btn-sm btn-outline-secondary mt-2 code-toggle" onclick="toggleCode('src-act')"><i class="bi bi-code-slash"></i> Ver código PlantUML</button>
+        <pre id="src-act" class="plantuml-src" style="display:none"></pre>
+      </div>
+
+    </div><!-- /tab-content -->
+
+    <p class="text-muted small mt-3">
+      <i class="bi bi-cloud me-1"></i>Los diagramas se renderizan desde
+      <a href="https://www.plantuml.com" target="_blank">www.plantuml.com</a>
+      — se requiere conexión a internet.
+    </p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ── Convierte texto PlantUML a URL del servidor via hex encoding ──
+    function toHex(str) {
+      let hex = '';
+      for (let i = 0; i < str.length; i++) {
+        hex += str.charCodeAt(i).toString(16).padStart(2, '0');
+      }
+      return hex;
+    }
+    function plantUmlUrl(uml) {
+      return 'https://www.plantuml.com/plantuml/svg/~h' + toHex(uml);
+    }
+    function render(imgId, srcId, uml) {
+      document.getElementById(imgId).src = plantUmlUrl(uml.trim());
+      document.getElementById(srcId).textContent = uml.trim();
+    }
+    function toggleCode(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // ════════════════════════════════════════════════
+    // 1. CASOS DE USO
+    // ════════════════════════════════════════════════
+    const ucUml = `
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+left to right direction
+
+actor "Bibliotecario" as Bib
+actor "Estudiante"    as Est
+
+rectangle "BibliotecaApp" {
+  usecase "Gestionar Autores"     as UC1
+  usecase "Gestionar Libros"      as UC2
+  usecase "Gestionar Estudiantes" as UC3
+  usecase "Registrar Préstamo"    as UC4
+  usecase "Registrar Devolución"  as UC5
+  usecase "Eliminar Préstamo"     as UC6
+  usecase "Ver Catálogo de\\nLibros Disponibles" as UC7
+}
+
+Bib --> UC1
+Bib --> UC2
+Bib --> UC3
+Bib --> UC4
+Bib --> UC5
+Bib --> UC6
+
+Est --> UC7
+Est --> UC4
+@enduml`;
+
+    // ════════════════════════════════════════════════
+    // 2. CLASES
+    // ════════════════════════════════════════════════
+    const clsUml = `
+@startuml
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+
+class Autor {
+  + int Id
+  + string? Nombre
+  + string? Nacionalidad
+  + DateTime FechaNacimiento
+}
+
+class Libro {
+  + int Id
+  + string? Titulo
+  + string? ISBN
+  + int AnioPublicacion
+  + bool Disponible
+  + int AutorId
+}
+
+class Estudiante {
+  + int Id
+  + string? Nombre
+  + string? Matricula
+}
+
+class Prestamo {
+  + int Id
+  + DateTime FechaPrestamo
+  + DateTime? FechaDevolucion
+  + int LibroId
+  + int EstudianteId
+}
+
+Autor    "1" --> "0..*" Libro    : tiene >
+Libro    "1" --> "0..*" Prestamo : incluye >
+Estudiante "1" --> "0..*" Prestamo : realiza >
+@enduml`;
+
+    // ════════════════════════════════════════════════
+    // 3. SECUENCIA
+    // ════════════════════════════════════════════════
+    const seqUml = `
+@startuml
+skinparam monochrome true
+
+actor        "Usuario"              as U
+participant  "Vista Create"         as V
+participant  "PrestamosController"  as C
+participant  "BibliotecaContext"    as Ctx
+database     "SQL Server"           as DB
+
+U  -> V   : Llena formulario\\n(LibroId, EstudianteId, FechaPrestamo)
+V  -> C   : POST /Prestamos/Create
+C  -> C   : ModelState.IsValid == true?
+
+C  -> Ctx : FindAsync(LibroId)
+Ctx-> DB  : SELECT * FROM Libros WHERE Id = LibroId
+DB --> Ctx: Libro encontrado
+Ctx--> C  : libroSeleccionado
+
+C  -> Ctx : libroSeleccionado.Disponible = false
+C  -> Ctx : Update(libroSeleccionado)
+C  -> Ctx : Add(prestamo)
+C  -> Ctx : SaveChangesAsync()
+Ctx-> DB  : INSERT Prestamos + UPDATE Libros
+DB --> Ctx: Confirmación OK
+Ctx--> C  : Guardado exitoso
+
+C  --> V  : RedirectToAction(Index)
+V  --> U  : Lista de Préstamos actualizada
+@enduml`;
+
+    // ════════════════════════════════════════════════
+    // 4. ESTADOS
+    // ════════════════════════════════════════════════
+    const stUml = `
+@startuml
+skinparam monochrome true
+
+[*] --> Disponible : Libro creado\\n(Disponible = true)
+
+state Disponible {
+  Disponible : Puede ser prestado
+}
+
+state Prestado {
+  Prestado : No puede ser prestado
+}
+
+Disponible --> Prestado    : Registrar Préstamo\\n[Disponible = false]
+Prestado   --> Disponible  : Registrar Devolución\\n[Disponible = true]
+Prestado   --> Disponible  : Eliminar Préstamo\\n[Disponible = true]
+Disponible --> [*]         : Eliminar Libro
+@enduml`;
+
+    // ════════════════════════════════════════════════
+    // 5. ACTIVIDADES — Devolver()
+    // ════════════════════════════════════════════════
+    const actUml = `
+@startuml
+skinparam monochrome true
+
+start
+
+:Recibe **id** del préstamo;
+
+:Buscar Prestamo en BD\\ncon Include(Libro);
+
+if (prestamo == null?) then (sí)
+  #pink:Retorna NotFound() 404;
+  stop
+else (no)
+endif
+
+if (FechaDevolucion == null?) then (sí)
+  :FechaDevolucion = DateTime.Now;
+
+  if (prestamo.Libro != null?) then (sí)
+    :Libro.Disponible = true;
+    :Context.Update(Libro);
+  else (no)
+  endif
+
+  :Context.Update(Prestamo);
+  :Context.SaveChangesAsync();
+
+else (no)
+  note right
+    El préstamo ya fue
+    devuelto anteriormente.
+    No se realiza ningún
+    cambio.
+  end note
+endif
+
+:RedirectToAction(Index);
+
+stop
+@enduml`;
+
+    // ── Renderizar todos al cargar ──
+    render('img-uc',  'src-uc',  ucUml);
+    render('img-cls', 'src-cls', clsUml);
+    render('img-seq', 'src-seq', seqUml);
+    render('img-st',  'src-st',  stUml);
+    render('img-act', 'src-act', actUml);
+  </script>
+</body>
+</html>
+`
